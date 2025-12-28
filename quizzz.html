@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DAV ICT Assessment</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+}
+.container {
+    width: 60%;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+}
+h1 {
+    text-align: center;
+    color: #2c3e50;
+}
+.option {
+    display: block;
+    padding: 8px;
+    margin: 6px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.option.correct {
+    background-color: #b6f2b6;
+}
+.option.wrong {
+    background-color: #f2b6b6;
+}
+.buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+button {
+    padding: 8px 20px;
+    margin: 5px;
+    font-size: 16px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>DAV Haveli Kharagpur, Assessment for Class VIII- 2025-26.</h1>
+
+<h3 id="question"></h3>
+<div id="options"></div>
+
+<div class="buttons">
+    <button onclick="prevQuestion()">Back</button>
+    <button onclick="nextQuestion()">Next</button>
+</div>
+</div>
+
+<script>
+const quiz = [
+{q:"1. What does ICT stand for?", o:["Information and Communication Technology","International Computer Tool","Internet Control Technology","Information Computer Type"], a:0},
+{q:"2. Brain of the computer is?", o:["RAM","CPU","Hard Disk","Monitor"], a:1},
+{q:"3. Which is an input device?", o:["Monitor","Printer","Keyboard","Speaker"], a:2},
+{q:"4. Which is an output device?", o:["Mouse","Scanner","Printer","Keyboard"], a:2},
+{q:"5. MS Word is a?", o:["System software","Application software","Hardware","Utility"], a:1},
+{q:"6. Which memory is temporary?", o:["ROM","Hard Disk","RAM","Pen Drive"], a:2},
+{q:"7. Full form of CPU?", o:["Central Processing Unit","Computer Processing Unit","Control Program Unit","Central Program Unit"], a:0},
+{q:"8. Which is an operating system?", o:["MS Word","Windows","Paint","Excel"], a:1},
+{q:"9. Shortcut for copy?", o:["Ctrl+V","Ctrl+C","Ctrl+X","Ctrl+S"], a:1},
+{q:"10. WWW stands for?", o:["World Wide Web","Wide World Web","Web World Wide","World Web Wide"], a:0},
+
+{q:"11. Mouse is a?", o:["Input device","Output device","Storage device","Processing device"], a:0},
+{q:"12. Printer is used to?", o:["Scan","Type","Print","Store"], a:2},
+{q:"13. Which stores data permanently?", o:["RAM","ROM","Cache","Register"], a:1},
+{q:"14. Antivirus is used to?", o:["Draw","Protect","Calculate","Type"], a:1},
+{q:"15. MS Excel is used for?", o:["Typing","Drawing","Calculations","Browsing"], a:2},
+{q:"16. Email is used to?", o:["Play games","Send messages","Edit photos","Store files"], a:1},
+{q:"17. Which is a browser?", o:["Windows","Chrome","Word","Paint"], a:1},
+{q:"18. Spacebar key is used to?", o:["Delete","Enter","Give space","Save"], a:2},
+{q:"19. Scanner is used to?", o:["Print","Scan images","Type","Calculate"], a:1},
+{q:"20. Google is a?", o:["Browser","Search engine","OS","Software"], a:1},
+
+{q:"21. Pen drive is a?", o:["Input device","Output device","Storage device","Processing device"], a:2},
+{q:"22. Binary system uses?", o:["0 & 1","1 & 2","2 & 3","5 & 10"], a:0},
+{q:"23. Which key saves file?", o:["Ctrl+C","Ctrl+V","Ctrl+S","Ctrl+X"], a:2},
+{q:"24. MS Paint is used for?", o:["Typing","Drawing","Calculating","Browsing"], a:1},
+{q:"25. Internet is a network of?", o:["Printers","Computers","Scanners","Monitors"], a:1},
+
+{q:"26. Keyboard contains?", o:["Buttons","Keys","Wires","Screens"], a:1},
+{q:"27. Which is NOT hardware?", o:["Mouse","Monitor","MS Word","Keyboard"], a:2},
+{q:"28. Monitor shows?", o:["Input","Output","Storage","Processing"], a:1},
+{q:"29. Computer works on?", o:["Instructions","Emotions","Thinking","Guess"], a:0},
+{q:"30. Ctrl+A means?", o:["Copy","Paste","Select All","Save"], a:2},
+
+{q:"31. Which produces sound?", o:["Monitor","Speaker","Scanner","Mouse"], a:1},
+{q:"32. Hard disk is used for?", o:["Typing","Storing data","Printing","Scanning"], a:1},
+{q:"33. Which is system software?", o:["Windows","Word","Paint","Excel"], a:0},
+{q:"34. Email contains?", o:["#","@","$","%"], a:1},
+{q:"35. Which is portable storage?", o:["RAM","Pen Drive","CPU","Monitor"], a:1},
+
+{q:"36. Which key deletes left text?", o:["Delete","Backspace","Enter","Shift"], a:1},
+{q:"37. Computer virus is?", o:["Hardware","Software","Device","File"], a:1},
+{q:"38. Which is NOT input device?", o:["Mouse","Keyboard","Printer","Scanner"], a:2},
+{q:"39. Pixel relates to?", o:["Sound","Image","Memory","Speed"], a:1},
+{q:"40. Which stores videos?", o:["CPU","Monitor","Storage device","Keyboard"], a:2},
+
+{q:"41. Laptop is?", o:["Desktop","Portable computer","Server","Tablet"], a:1},
+{q:"42. Which is an example of hardware?", o:["MS Word","Windows","Mouse","Excel"], a:2},
+{q:"43. Ctrl+Z is used to?", o:["Redo","Undo","Save","Paste"], a:1},
+{q:"44. Which is NOT software?", o:["Paint","Excel","Keyboard","Word"], a:2},
+{q:"45. Computer cannot work without?", o:["Printer","Software","Scanner","Speaker"], a:1},
+
+{q:"46. Which stores OS?", o:["RAM","ROM","Hard Disk","Cache"], a:2},
+{q:"47. Which is output?", o:["Keyboard","Mouse","Speaker","Scanner"], a:2},
+{q:"48. Which is drawing software?", o:["Excel","Paint","Word","Chrome"], a:1},
+{q:"49. Which key starts new line?", o:["Shift","Enter","Ctrl","Alt"], a:1},
+{q:"50. ICT helps in?", o:["Communication","Gaming only","Typing only","Drawing only"], a:0}
+];
+
+let current = 0;
+let answered = [];
+
+function loadQuestion() {
+    document.getElementById("question").innerText = quiz[current].q;
+    const optionsDiv = document.getElementById("options");
+    optionsDiv.innerHTML = "";
+
+    quiz[current].o.forEach((opt, index) => {
+        const div = document.createElement("div");
+        div.className = "option";
+        div.innerText = opt;
+        div.onclick = () => checkAnswer(div, index);
+        optionsDiv.appendChild(div);
+    });
+}
+
+function checkAnswer(element, index) {
+    if (answered[current]) return;
+    answered[current] = true;
+    const options = document.querySelectorAll(".option");
+    options[quiz[current].a].classList.add("correct");
+    if (index !== quiz[current].a) {
+        element.classList.add("wrong");
+    }
+}
+
+function nextQuestion() {
+    if (current < quiz.length - 1) {
+        current++;
+        loadQuestion();
+    }
+}
+
+function prevQuestion() {
+    if (current > 0) {
+        current--;
+        loadQuestion();
+    }
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
